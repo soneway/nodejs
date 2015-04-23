@@ -1,31 +1,84 @@
 var Mysql = require('mysql');
 
-console.log(Mysql);
-
-var connection = Mysql.createConnection({
+var db = Mysql.createConnection({
     user: 'root',
-    password: '',
+    passworld: '',
     database: 'nodejs'
 });
 
-console.log(connection);
 
-var insertSql='INSERT INTO user VALUES(NULL, "soneway", 28)',
-    selectSql='SELECT * FROM user',
-    updateSql='UPDATE user SET name="lxying" WHERE ID=2';
-
-connection.connect(function (err) {
+//打开连接
+db.connect(function (err) {
     if (err) {
-        console.log(err);
-        return;
+        throw 'connect' + err;
     }
+});
 
-    //插入一条数据
-    connection.query(updateSql, function (err, rs) {
+//db.query('SET NAMES "utf8"');
+
+//插入
+db.query({
+    sql: 'INSERT INTO user VALUES(?, ?, ?)',
+    values: [null, '呵呵呵', 28]
+}, function (err, rs) {
+    if (err) {
+        throw 'insert' + err;
+    }
+    console.log(rs);
+});
+
+//更新
+db.query({
+    sql: 'UPDATE user SET name=? WHERE id=?',
+    values: ['宋均均', 1]
+}, function (err, rs) {
+    if (err) {
+        throw 'update' + err;
+    }
+    console.log(rs);
+});
+
+//查询
+db.query({
+    sql: 'SELECT * FROM user'
+}, function (err, rs, fields) {
+    if (err) {
+        throw 'select' + err;
+    }
+    console.log(rs);
+});
+
+//查询(用??来placehold字段,表名等)
+db.query({
+    sql: 'SELECT ?? FROM ??',
+    values: [
+        ['id', 'name'],
+        'user'
+    ]
+}, function (err, rs) {
+    if (err) {
+        throw 'select' + err;
+    }
+    console.log(rs);
+});
+
+//更新
+db.query({
+        sql: 'UPDATE user SET ? WHERE id=?',
+        values: [
+            {
+                name: '恩恩恩'
+            },
+            3
+        ]
+    },
+    function (err, rs) {
         if (err) {
-            console.log(err);
-            return;
+            throw 'update' + err;
         }
         console.log(rs);
     });
-});
+
+
+//关闭连接
+db.end();
