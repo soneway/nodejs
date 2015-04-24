@@ -48,6 +48,7 @@ db.query({
     console.log(rs);
 });
 
+
 //查询(用??来placehold字段,表名等)
 db.query({
     sql: 'SELECT ?? FROM ??',
