@@ -38,6 +38,8 @@ db.query({
     console.log(rs);
 });
 
+
+
 //查询
 db.query({
     sql: 'SELECT * FROM user'
