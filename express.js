@@ -17,11 +17,11 @@ app.get('/:id?', function (req, res) {
 //app.use(Express.methodOverride());
 
 app.get('/', function (req, res) {
-    res.send('<form method="post" action="http://localhost:8080/"><input type="hidden" name="_method" value="put"/><input type="text" name="username"/><input type="submit" value="ok"/></form>');
+    res.send('<form method="post" action="/"><input type="text" name="username"/><input type="submit" value="ok"/></form>');
 });
 
-app.put('/', function (req, res) {
-    res.send('ä½ å¥½' + req.body.username);
+app.request('/', function (req, res) {
+    res.send('ÄãºÃ: ' + req.body.username);
 });
 
 
