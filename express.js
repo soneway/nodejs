@@ -21,7 +21,7 @@ app.get('/', function (req, res) {
 });
 
 app.request('/', function (req, res) {
-    res.send('ÄãºÃ: ' + req.body.username);
+    res.send('ä½ å¥½: ' + req.body.username);
 });
 
 
